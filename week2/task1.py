@@ -16,6 +16,19 @@ class HelloMessage:
         return f'Здравствуй, {self.recipient}!'
 
 
+class TestUnit:
+    def __init__(self, _class, _input, _output):
+        self._class = _class
+        self._input = _input
+        self._output = _output
+        self.is_passed = self.is_passed_test()
+        print('testing...', self._class, end=' ')
+
+    def is_passed_test(self):
+        test = self._class(self._input)
+        return test.__str__() == self._output
+
+
 def test_hello_message(test: Optional[str] = None):
     print('testing...', test)
     test_case_passed = HelloMessage(test).__str__() == f'Здравствуй, {test}!' if test else 'Здравствуй, Мир!'
@@ -23,6 +36,5 @@ def test_hello_message(test: Optional[str] = None):
 
 
 if __name__ == '__main__':
-    test_hello_message('Python')
-    test_hello_message('World')
-    test_hello_message()
+    test = TestUnit(HelloMessage, 'Гвидо', 'Здравствуй, Гвидо!')
+    print('passed' if test.is_passed else 'fail')
