@@ -4,12 +4,12 @@
 #    Output must be "Привет, $name". Uses similar with task 1 code.
 #    to complete task remove
 #    -----------------------------------------------------------
+from task1 import HelloMessage
+from task1 import TestUnit
 
-def say_hello(name: str = None):
-    """Prints greeting to specified name"""
-    if name is None:
-        name = input()
-    print(f'Привет, {name}')
+if __name__ == '__main__':
+    test = TestUnit(HelloMessage, 'Гвидо', 'Здравствуй, Гвидо!')
+    print('passed' if test.is_passed else 'fail')
 
 
-say_hello()
+
