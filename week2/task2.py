@@ -8,8 +8,13 @@ class Sequence:
     def __init__(self, data: list):
         self.data = data
 
+    def _print(self):
+        for element in self.data:
+            print(element, end=' ')
+
     def __str__(self):
         return ' '.join(self.data)
+
 
 
 class TestUnit:
@@ -18,13 +23,17 @@ class TestUnit:
         self._input = _input
         self._output = _output
         self.is_passed = self.is_passed_test()
-        print('test...', end=' ')
+        print('testing...', end=' ')
 
     def is_passed_test(self):
-        test_case = self._class(self._input)
-        return test_case.__str__() == self._output
+        test = self._class(self._input)
+        return test.__str__() == self._output
+
 
 
 if __name__ == '__main__':
     test = TestUnit(Sequence, ['4', '8', '15', '16', '23', '42'], '4 8 15 16 23 42')
     print('passed' if test.is_passed else 'failed')
+
+
+#sequence = Sequence(['4', '8', '15', '16', '23', '42'])
