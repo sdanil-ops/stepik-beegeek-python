@@ -2,21 +2,35 @@
 #    Copyright (c) 2021. Danil Smirnov
 #    Input is an integer, output is previous and next integer
 #    -----------------------------------------------------------
-
-def get_next_number(number: int) -> int:
-    """returns next number"""
-    return number + 1
+from task1 import TestUnit
 
 
-def get_previous_number(number: int) -> int:
-    """returns previous number"""
-    return number - 1
+class Number:
+    def __init__(self, value: int):
+        self.value = value
+        self.next = self.get_next()
+        self.prev = self.get_prev()
+
+    def get_next(self) -> int:
+        """returns next number"""
+        return self.value + 1
+
+    def get_prev(self) -> int:
+        """returns previous number"""
+        return self.value - 1
+
+    def __repr__(self):
+        return f'Следующее за числом {self.value} число: {self.next}\n' \
+               f'Для числа {self.value} предыдущее число: {self.prev}'
 
 
-def print_next_and_previous(number: int):
-    """Prints next and previous number of given number"""
-    print("Следующее за числом", number, "число:", get_next_number(number))
-    print("Для числа", number, "предыдущее число:", get_previous_number(number))
+# -------------- test ----------------
+# if __name__ == '__main__':
+#     test = TestUnit(Number, 2, f'Следующее за числом 2 число: 3\nДля числа 2 предыдущее число: 1')
+#     print('passed' if test.is_passed else 'failed')
 
 
-print_next_and_previous(int(input()))
+# -------------- run -----------------
+if __name__ == '__main__':
+    number = Number(int(input()))
+    print(number)
