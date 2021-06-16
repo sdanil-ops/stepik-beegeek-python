@@ -4,12 +4,30 @@
 #    each on a separate line. The first number is entered by the user,
 #    the rest of the numbers are calculated in the program.
 #    -----------------------------------------------------------
-def print_consecutive_numbers(number: int = None, quantity: int = 3):
-    """Prints sequence of consecutive numbers with specified quantity"""
-    if number is None:
-        number = int(input())
-    for i in range(quantity):
-        print(number + i)
+from task1 import TestUnit
+
+class Number:
+    def __init__(self, value: int):
+        self.value = value
+        self.next = self.get_next(self.value)
+        self.one_after_next = self.get_next(self.next)
+        self.sequence = self.__repr__()
+
+    def get_next(self, value: int):
+        return value + 1
 
 
-print_consecutive_numbers()
+    def __repr__(self):
+        return f'{self.value}\n{self.next}\n{self.one_after_next}'
+
+
+#---------- test -----------
+# if __name__ == '__main__':
+#     test = TestUnit(Number, 1, '1\n2\n3')
+#     print('passed' if test.is_passed else 'failed')
+
+
+#---------- run ------------
+if __name__ == '__main__':
+    number = Number(int(input()))
+    print(number.sequence)
