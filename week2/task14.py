@@ -3,20 +3,34 @@
 #    Program that calculates the volume of a cube and its total
 #    surface area, given entered value for the length of the edge
 #    -----------------------------------------------------------
-def calculate_cube_volume(edge: int) -> int:
-    """calculates volume of cube with known edge"""
-    return edge ** 3
+class Cube:
+    def __init__(self, edge: int):
+        self.edge = edge
+        self.volume = self.calculate_cube_volume()
+        self.area = self.calculate_cube_area()
+
+    def calculate_cube_volume(self) -> int:
+        """calculates volume of cube with known edge"""
+        return self.edge ** 3
+
+    def calculate_cube_area(self) -> int:
+        """calculates area of cube with known edge edge"""
+        return 6 * (self.edge ** 2)
+
+    def __repr__(self):
+        return f'Объем = {self.volume}\n'\
+               f'Площадь полной поверхности = {self.area}'
 
 
-def calculate_cube_area(edge: int) -> int:
-    """calculates area of cube with known edge edge"""
-    return 6 * (edge ** 2)
+# _________ test ____________
+if __name__ == '__main__':
+    print('testing', Cube.calculate_cube_volume, Cube.calculate_cube_area)
+    cube = Cube(25)
+    test_passed = cube.area == 3750 and cube.volume == 15625
+    print('passed' if test_passed else 'failed')
 
 
-def print_cube_area_and_volume(edge: int):
-    """Calculates and prints area and volume of cube with known edge """
-    print("Объем =", calculate_cube_volume(edge))
-    print("Площадь полной поверхности =", calculate_cube_area(edge))
-
-
-print_cube_area_and_volume(int(input()))
+#---------- run -------------
+# if __name__ == '__main__':
+#     cube = Cube(int(input()))
+#     print(cube)
