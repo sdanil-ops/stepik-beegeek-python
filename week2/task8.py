@@ -21,12 +21,14 @@ class ThreeStrings:
 
         return result
 
+
 # test
-# if __name__ == '__main__':
-#     test = TestUnit(ThreeStrings, ['i', 'was', 'born'], 'i\nwas\nborn\n')
-#     print('passed' if test.is_passed else 'failed')
+if __name__ == '__main__':
+    test = TestUnit(ThreeStrings, ['i', 'was', 'born'], 'born\nwas\ni\n')
+    print('passed' if test.is_passed else 'failed')
+
 
 # run
-if __name__ == '__main__':
-    strings = ThreeStrings([input() for _ in range(3)])
-    print(strings)
+# if __name__ == '__main__':
+#     strings = ThreeStrings([input() for _ in range(3)])
+#     print(strings)
