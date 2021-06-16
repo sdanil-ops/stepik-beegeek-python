@@ -4,16 +4,36 @@
 #    and then prints the specified lines through the separator.
 #    Uses code from task7. Just paste it
 #    -----------------------------------------------------------
-def get_list_from_input(count: int = 3) -> list:
-    """Returns list of inputted strings"""
-    data = []
-    for i in range(count + 1):
-        data.append(input())
-    return data
-
-def print_with_separator(data: list):
-    """Prints string from inputted list, with first element as separator"""
-    print(*data[1:], sep=data[0])
+from typing import List
+from task1 import TestUnit
 
 
-print_with_separator(get_list_from_input())
+class StringsWithSeparator:
+    def __init__(self, strings: List[str], separator: str = None):
+        self.strings = strings
+        if separator is None:
+            self.separator = '***'
+        else:
+            self.separator = separator
+
+    def separate(self):
+        result = ''
+        for string in self.strings:
+            result += string + self.separator
+
+        return result[:-len(self.separator)]
+
+    def __repr__(self):
+        return self.separate()
+
+
+# -------------- run --------------------
+if __name__ == '__main__':
+    test = TestUnit(StringsWithSeparator, ['one', 'two three', 'four'], 'one***two three***four')
+    print('passed' if test.is_passed else 'failed')
+
+
+# ------------- test --------------------
+# if __name__ == '__main__':
+#     strings = StringsWithSeparator(separator=input(), strings=[input() for _ in range(3)])
+#     print(strings)
