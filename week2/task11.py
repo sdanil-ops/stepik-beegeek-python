@@ -4,11 +4,27 @@
 #    "Привет" (without quotes), followed by a comma and space,
 #    followed by the name and exclamation point entered.
 #    -----------------------------------------------------------
-def say_hello(name: str = None):
-    """Prints hello to a specified name"""
-    if name is None:
-        name = input()
-    print(f'Привет, {name}!')
+from task1 import TestUnit
 
 
-say_hello()
+class HelloMessage:
+    def __init__(self, name: str = None):
+        if name is None:
+            self.name = 'friend'
+        else:
+            self.name = name
+
+    def __repr__(self):
+        return f'Привет, {self.name}!'
+
+
+# _________ test ___________
+if __name__ == '__main__':
+    test = TestUnit(HelloMessage, 'Гвидо', 'Привет, Гвидо!')
+    print('passed' if test.is_passed else 'failed')
+
+
+# _________ run ____________
+# if __name__ == '__main__':
+#     hello_message = HelloMessage(input())
+#     print(hello_message)
