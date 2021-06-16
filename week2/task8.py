@@ -5,12 +5,28 @@
 #    each on a separate line. Uses code from previous task.
 #    Just paste it.
 #    -----------------------------------------------------------
-from task7 import get_list_from_input
+from typing import List
+from task1 import TestUnit
 
 
-def print_reverted_list(data: list):
-    """Prints unpacked list in reverse order. Each element on separate line"""
-    print(*data[::-1], sep='\n')
+class ThreeStrings:
+    def __init__(self, strings: List[str]):
+        self.strings = strings
 
+    def __repr__(self):
+        data = self.strings[::-1]
+        result = ''
+        for string in data:
+            result += string + '\n'
 
-print_reverted_list(get_list_from_input())
+        return result
+
+# test
+# if __name__ == '__main__':
+#     test = TestUnit(ThreeStrings, ['i', 'was', 'born'], 'i\nwas\nborn\n')
+#     print('passed' if test.is_passed else 'failed')
+
+# run
+if __name__ == '__main__':
+    strings = ThreeStrings([input() for _ in range(3)])
+    print(strings)
