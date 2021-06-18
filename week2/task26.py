@@ -4,19 +4,33 @@
 #    specified in minutes into the value expressed
 #    in hours and minutes.
 #    -----------------------------------------------------------
-def get_complete_hours(minutes: int) -> int:
-    """returns the number of complete hours"""
-    return minutes // 60
+from task1 import TestUnit
 
 
-def get_rest_minutes(minutes: int) -> int:
-    """returns the number of minutes remaining"""
-    return minutes % 60
+class TimeInterval:
+    def __init__(self, minutes: int):
+        self.minutes = minutes
+        self.complete_hours = self.get_complete_hours()
+        self.rest_minutes = self.get_rest_minutes()
+
+    def get_complete_hours(self):
+        """returns the number of complete hours"""
+        return self.minutes // 60
+
+    def get_rest_minutes(self):
+        """returns the number of minutes remaining"""
+        return self.minutes % 60
+
+    def __repr__(self):
+        return f'{self.minutes} мин - это {self.complete_hours} час {self.rest_minutes} минут.'
 
 
-def convert_to_hours_and_minutes(minutes: int) -> str:
-    """returns minutes expressed in hours and minutes."""
-    return f'{minutes} мин - это {get_complete_hours(minutes)} час {get_rest_minutes(minutes)} минут.'
+# ------------- testing -------------
+if __name__ == '__main__':
+    test = TestUnit(TimeInterval, 150, '150 мин - это 2 час 30 минут.')
+    print('passed' if test.is_passed else 'failed')
 
-
-print(convert_to_hours_and_minutes(int(input())))
+# ------------- running -------------
+# if __name__ == '__main__':
+#     time_interval = TimeInterval(int(input()))
+#     print(time_interval)
