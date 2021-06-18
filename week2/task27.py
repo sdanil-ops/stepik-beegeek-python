@@ -3,32 +3,40 @@
 #    program calculates the sum and the product
 #    of the digits of a positive three-digit number.
 #    -----------------------------------------------------------
-from typing import Tuple
+from task1 import TestUnit
 
 
-def calculate_sum_of_digits(number: int) -> int:
-    """returns sum of digits of a positive number"""
-    result = 0
-    while number > 0:
-        result += number % 10
-        number //= 10
-    return result
+class Number:
+    def __init__(self, value: int):
+        self.value = value
+        self.sum_of_digits = self.calculate_sum_of_digits(self.value)
+        self.product_of_digits = self.calculate_product_of_digits(self.value)
+
+    def calculate_sum_of_digits(self, number: int) -> int:
+        result = 0
+        while number > 0:
+            result += number % 10
+            number //= 10
+        return result
+
+    def calculate_product_of_digits(self, number: int):
+        result = 1
+        while number > 0:
+            result *= number % 10
+            number //= 10
+        return result
+
+    def __repr__(self):
+        return f'Сумма цифр = {self.sum_of_digits}\nПроизведение цифр = {self.product_of_digits}'
 
 
-def calculate_product_of_digits(number: int) -> int:
-    """returns product of digits of a positive number"""
-    result = 1
-    while number > 0:
-        result *= number % 10
-        number //= 10
-    return result
-
-
-def get_sum_and_product_of_digits(number: int) -> Tuple[str, str]:
-    """returns sum and product of a positive number"""
-    return f'Сумма цифр = {calculate_sum_of_digits(number)}', \
-           f'Произведение цифр = {calculate_product_of_digits(number)}'
-
-
+# ------------ testing ------------
 if __name__ == '__main__':
-    print(*get_sum_and_product_of_digits(int(input())), sep='\n')
+    test = TestUnit(Number, 123, 'Сумма цифр = 6\nПроизведение цифр = 6')
+    print('passed' if test.is_passed else 'failed')
+
+
+# ------------ running ------------
+# if __name__ == '__main__':
+#     number = Number(int(input()))
+#     print(number)
