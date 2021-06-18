@@ -7,9 +7,28 @@
 #    nd round up the number of survivors. Help the Avengers count
 #    the number of survivors.
 #    -----------------------------------------------------------
-def count_number_of_survivors(population: int) -> int:
-    """predicts count of survivors after Thanos attack"""
-    return  population // 2 + population % 2
+from task1 import TestUnit
 
 
-print(count_number_of_survivors(int(input())))
+class Population:
+    def __init__(self, population: int):
+        self.population = population
+        self.survivors = self.count_survivors()
+
+    def count_survivors(self):
+        return self.population // 2 + self.population % 2
+
+    def __repr__(self):
+        return str(self.survivors)
+
+
+# ------------- testing -------------
+# if __name__ == '__main__':
+#     test = TestUnit(Population, 99, '50')
+#     print('passed' if test.is_passed else 'failed')
+
+
+# ------------- running -------------
+if __name__ == '__main__':
+    univerce_population = Population(int(input()))
+    print(univerce_population)
