@@ -5,15 +5,15 @@
 #    How many whole tangerines will each student get?
 #    How many whole tangerines are left in the basket?
 #    -----------------------------------------------------------
-from typing import Tuple
+class Distribute:
+    def __init__(self, recipients_count: int, product_count: int):
+        self.recipients_count = recipients_count
+        self.product_count = product_count
+
+    def distribute(self):
+        return self.product_count // self.recipients_count, self.product_count % self.recipients_count
 
 
-def distribute_tangerines(recipients: int, tangerines: int) -> Tuple[int, int]:
-    """
-    returns number of tangerines that each recipient will
-    get and the number of tangerines that will remain in the basket
-    """
-    return tangerines // recipients, tangerines % recipients
-
-
-print(*distribute_tangerines(int(input()), int(input())), sep='\n')
+if __name__ == '__main__':
+    tangerines = Distribute(int(input()), int(input()))
+    print(*tangerines.distribute(), sep='\n')
