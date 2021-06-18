@@ -2,36 +2,41 @@
 #    Copyright (c) 2021. Danil Smirnov
 #    a program for finding the digits of a four-digit number
 #    -----------------------------------------------------------
-from typing import Tuple
+class Number:
+    def __init__(self, value: int):
+        self.value = value
+        self.ones = self.count_ones()
+        self.tens = self.count_tens()
+        self.hundreds = self.count_hundreds()
+        self.thousands = self.count_thousands()
 
+    def count_ones(self) -> int:
+        return self.value % 10
 
-def count_ones(number: int) -> int:
-    """returns count of ones"""
-    return number % 10
+    def count_tens(self):
+        return (self.value // 10) % 10
 
+    def count_hundreds(self):
+        return (self.value // 100) % 10
 
-def count_tens(number: int) -> int:
-    """returns count of tens"""
-    return (number // 10) % 10
+    def count_thousands(self):
+        return self.value // 1000
 
+    def __repr__(self):
+        return f'Цифра в позиции тысяч равна {self.thousands}\nЦифра в позиции сотен равна {self.hundreds}\nЦифра в ' \
+               f'позиции десятков равна {self.tens}\nЦифра в позиции единиц равна {self.ones} '
 
-def count_hundreds(number: int) -> int:
-    """returns count of hundreds"""
-    return (number // 100) % 10
-
-
-def count_thousands(number: int) -> int:
-    """returns count of thousands"""
-    return number // 1000
-
-
-def decompose_number(number: int) -> Tuple[str, str, str, str]:
-    """decomposes number into components"""
-    return f'Цифра в позиции тысяч равна {count_thousands(number)}', \
-           f'Цифра в позиции сотен равна {count_hundreds(number)}', \
-           f'Цифра в позиции десятков равна {count_tens(number)}', \
-           f'Цифра в позиции единиц равна {count_ones(number)}'
-
-
+# ------------- testing -------------
+# if __name__ == '__main__':
+#     test_is_passed = Number(3281).thousands == 3
+#     print('passed' if test_is_passed else 'failed')
+#     test_is_passed = Number(3281).hundreds == 2
+#     print('passed' if test_is_passed else 'failed')
+#     test_is_passed = Number(3281).tens == 8
+#     print('passed' if test_is_passed else 'failed')
+#     test_is_passed = Number(3281).ones == 1
+#     print('passed' if test_is_passed else 'failed')
+# ------------- running -------------
 if __name__ == '__main__':
-    print(*decompose_number(int(input())), sep='\n')
+    number = Number(int(input()))
+    print(number)
