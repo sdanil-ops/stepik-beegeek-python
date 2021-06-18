@@ -6,10 +6,23 @@
 #    the given number is located
 #    (the numbering of seats is through, starting with 1).
 #    -----------------------------------------------------------
-def get_compartment_number(place_number: int, places: int = 4, starts_from: int = 1) -> int:
-    """returns compartment number by given place number"""
-    return (place_number - starts_from) // places + starts_from
+class Carriage:
+    compartments_count: int = 9
 
 
-print(get_compartment_number(int(input())))
+class Compartment(Carriage):
+    places_count: int = 4
 
+
+class CompartmentPlace(Compartment):
+    def __init__(self, number: int):
+        self.number = number
+        self.compartment_number = self.get_compartment_number()
+
+    def get_compartment_number(self):
+        return (self.number - 1) // self.places_count + 1
+
+
+if __name__ == '__main__':
+    place = CompartmentPlace(int(input()))
+    print(place.compartment_number)
