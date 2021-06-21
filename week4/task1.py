@@ -1,30 +1,36 @@
+
 #    -----------------------------------------------------------
 #    Copyright (c) 2021. Danil Smirnov
 #     program compares the password and its confirmation.
 #     If they match, the program displays: "Password accepted",
 #     otherwise: "Password not accepted".
 #    -----------------------------------------------------------
-def is_same(password: str, confirmation: str) -> bool:
-    """
-    returns True if password and confirmation is same, otherwise returns False
-    :param password:
-    :param confirmation:
-    :return:
-    """
-    return password == confirmation
+class Password:
+    password: str or int
 
 
-def check_password(password: str, confirmation: str) -> str:
-    """
-    checks password
-    :param password:
-    :param confirmation:
-    :return:
-    """
-    if is_same(password, confirmation):
-        return 'Пароль принят'
-    return 'Пароль не принят'
+class PasswordConfirmation(Password):
+    def __init__(self, password: str or int, confirmation: str or int):
+        self.password = password
+        self.confirmation = confirmation
+        self.is_valid = self.is_valid_password()
+
+    def is_valid_password(self):
+        return self.password == self.confirmation
+
+    def __repr__(self):
+        if self.is_valid:
+            return 'Пароль принят'
+        return 'Пароль не принят'
 
 
+# ------------ testing ------------
+# if __name__ == '__main__':
+#     test_is_passed = PasswordConfirmation(123, 123).__repr__() == 'Пароль принят'
+#     print('test 1 is passed' if test_is_passed else 'test 1 is failed')
+#     test_is_passed = PasswordConfirmation(123, 321).__repr__() == 'Пароль не принят'
+#     print('test 2 is passed' if test_is_passed else 'test 2 is failed')
+# ------------ running ------------
 if __name__ == '__main__':
-    print(check_password(input(), input()))
+    password = PasswordConfirmation(input(), input())
+    print(password)
