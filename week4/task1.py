@@ -1,4 +1,3 @@
-
 #    -----------------------------------------------------------
 #    Copyright (c) 2021. Danil Smirnov
 #     program compares the password and its confirmation.
