@@ -6,15 +6,34 @@
 from typing import Tuple
 
 
-def is_in_interval(number: int, intervals: Tuple[int, int] = (-1, 17)):
-    return intervals[0] < number < intervals[1]
+class Interval:
+    interval: Tuple[int, int] = (-1, 17)
 
 
-def check_affiliation(number: int) -> str:
-    if is_in_interval(number):
+class Point(Interval):
+    def __init__(self, point: int):
+        self.point = point
+        self.in_interval = self.is_in_interval()
+        self.affiliation = self.check_affiliation()
+
+    def is_in_interval(self):
+        return self.interval[0] < self.point < self.interval[1]
+
+    def check_affiliation(self):
+        if self.in_interval:
+            return 'Принадлежит'
         return 'Не принадлежит'
-    return 'Принадлежит'
 
 
 if __name__ == '__main__':
-    print(check_affiliation(int(input())))
+    # ---------- testing ----------
+    # tests = {
+    #     'test 1': Point(2).in_interval == True,
+    #     'test 2': Point(-790).in_interval == False,
+    #     'test 3': Point(-1).in_interval == False
+    # }
+    # for test in tests:
+    #     print(f'passed {test}' if tests[test] else f'failed {test}')
+    # ---------- running ----------
+    point = Point(int(input()))
+    print(point.affiliation)
