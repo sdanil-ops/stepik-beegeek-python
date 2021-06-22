@@ -5,22 +5,35 @@
 #    last digits is equal to the difference between the second
 #    and third digits.
 #    -----------------------------------------------------------
-def calculate_sum_of_last_and_first_digits(number: int) -> int:
-    """returns sum of first and last digits of inputted number"""
-    return (number % 10) + ((number % 10 ** 4) // 10 ** 3)
+class Number:
+    def __init__(self, value: int):
+        self.value = value
+        self.sum_of_first_and_last_digits = self.calculate_sum_of_first_and_last_digits()
+        self.difference_between_second_and_third_digits = self.calculate_difference_between_second_and_third_digits()
+        self.ratio = self.check_ratio()
+
+    def calculate_sum_of_first_and_last_digits(self):
+        return (self.value % 10) + ((self.value % 10 ** 4) // 10 ** 3)
+
+    def calculate_difference_between_second_and_third_digits(self):
+        return ((self.value % 10 ** 3) // 10 ** 2) - (self.value % 10 ** 2) // 10 ** 1
+
+    def check_ratio(self):
+        if self.sum_of_first_and_last_digits == self.difference_between_second_and_third_digits:
+            return 'ДА'
+        return 'НЕТ'
 
 
-def calculate_difference_between_last_and_first_digits(number: int) -> int:
-    """returns difference between first and last digits of inputted number"""
-    return ((number % 10 ** 3) // 10 ** 2) - (number % 10 ** 2) // 10 ** 1
+# ----------- testing -----------
+# if __name__ == '__main__':
+#     test_is_passed = Number(1614).ratio == 'ДА'
+#     print('test 1 passed' if test_is_passed else 'failed test 1')
+#     test_is_passed = Number(1234).ratio == 'НЕТ'
+#     print('test 2 passed' if test_is_passed else 'failed test 2')
+#     test_is_passed = Number(7911).ratio == 'ДА'
+#     print('test 3 passed' if test_is_passed else 'failed test 3')
 
-
-def check_ratio(number: int) -> str:
-    """returns YES if ratio is fulfilled, else NO"""
-    if calculate_sum_of_last_and_first_digits(number) == calculate_difference_between_last_and_first_digits(number):
-        return 'ДА'
-    return 'НЕТ'
-
-
+# ----------- running -----------
 if __name__ == '__main__':
-    print(check_ratio(int(input())))
+    number = Number(int(input()))
+    print(number.ratio)
