@@ -7,7 +7,7 @@ from typing import Tuple
 
 
 class Interval:
-    interval: Tuple[int, int] = (-1, 17)
+    area: Tuple[int, int] = (-1, 17)
 
 
 class Point(Interval):
@@ -17,7 +17,7 @@ class Point(Interval):
         self.affiliation = self.check_affiliation()
 
     def is_in_interval(self):
-        return self.interval[0] < self.point < self.interval[1]
+        return self.area[0] < self.point < self.area[1]
 
     def check_affiliation(self):
         if self.in_interval:
