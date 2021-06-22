@@ -3,32 +3,44 @@
 #    Write a program that, according to the entered age of the user,
 #    tells which age group he belongs to
 #    -----------------------------------------------------------
-def is_old(age: int) -> bool:
-    return age >= 60
+class User:
+    def __init__(self, age: int):
+        self.age = age
+        self.age_group = self.get_age_group()
 
+    def is_old(self) -> bool:
+        return self.age >= 60
 
-def is_mature(age: int) -> bool:
-    return 59 >= age >= 25
+    def is_mature(self) -> bool:
+        return 59 >= self.age >= 25
 
+    def is_young(self) -> bool:
+        return 24 >= self.age >= 14
 
-def is_young(age: int) -> bool:
-    return 24 >= age >= 14
+    def is_child(self) -> bool:
+        return 13 >= self.age
 
-
-def is_child(age: int) -> bool:
-    return 13 >= age
-
-
-def get_age_group(age: int) -> str:
-    if is_old(age):
-        return 'старость'
-    if is_mature(age):
-        return 'зрелость'
-    if is_young(age):
-        return 'молодость'
-    if is_child(age):
-        return 'детство'
+    def get_age_group(self):
+        if self.is_old():
+            return 'старость'
+        if self.is_mature():
+            return 'зрелость'
+        if self.is_young():
+            return 'молодость'
+        if self.is_child():
+            return 'детство'
 
 
 if __name__ == '__main__':
-    print(get_age_group(int(input())))
+    # ---------- testing ----------
+    # tests = {
+    #     'test 1': User(age=4).age_group == 'детство',
+    #     'test 2': User(age=91).age_group == 'старость',
+    #     'test 3': User(age=40).age_group == 'зрелость'
+    # }
+    # for test in tests:
+    #     print(f'passed {test}' if tests[test] else f'failed {test}')
+
+    # ---------- running ----------
+    user = User(age=int(input()))
+    print(user.age_group)
