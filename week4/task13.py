@@ -5,15 +5,28 @@
 #    whether the entered number is beautiful. The program
 #    should print "YES" if the number is pretty, or "NO" otherwise.
 #    -----------------------------------------------------------
-def is_interesting_number(number: int) -> bool:
-    return (1000 <= number <= 9999) and ((number % 7 == 0) or (number % 17 == 0))
+class Number:
+    def __init__(self, value: int):
+        self.value = value
+        self.is_intresting = self.is_interesting_number()
+        self.interestingness = 'YES' if self.is_intresting else 'NO'
 
-
-def check_number_interestingness(number: int) -> str:
-    if is_interesting_number(number):
-        return 'YES'
-    return 'NO'
+    def is_interesting_number(self):
+        return (1000 <= self.value <= 9999) and ((self.value % 7 == 0) or (self.value % 17 == 0))
 
 
 if __name__ == '__main__':
-    print(check_number_interestingness(int(input())))
+    # ------------- testing -------------
+
+    # tests = {
+    #     'test 1': Number(1043).interestingness == 'YES',
+    #     'test 2': Number(1045).interestingness == 'NO',
+    #     'test 3': Number(2751).interestingness == 'YES'
+    # }
+    # for test in tests:
+    #     print(f'passed {test}' if tests[test] else f'failed {test}')
+
+    # ------------- running -------------
+
+    number = Number(int(input()))
+    print(number.interestingness)
