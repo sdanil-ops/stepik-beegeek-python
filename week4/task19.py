@@ -9,26 +9,39 @@ class Triangle:
         self.x = x
         self.y = y
         self.z = z
-        self.type = self.Type(x=x, y=y, z=z)
+        self.type = self.check_type()
 
-    class Type:
-        def __init__(self, x: int, y: int, z: int):
-            self.type = self.check_type(x, y, z)
+    def is_equilateral(self):
+        return self.x == self.y == self.z
 
-        def check_type(self, x: int, y: int, z: int):
-            if self.is_equilateral(x, y, z):
-                return 'Равносторонний'
-            if self.is_isosceles(x, y, z):
-                return 'Равнобедренный'
-            return 'Разносторонний'
+    def is_isosceles(self):
+        return self.x == self.y != self.z or self.x != self.y == self.z or self.x == self.z != self.y
 
-        def is_equilateral(self, x: int, y: int, z: int) -> bool:
-            return x == y == z
+    def check_type(self):
+        if self.is_equilateral():
+            return 'Равносторонний'
+        if self.is_isosceles():
+            return 'Равнобедренный'
+        return 'Разносторонний'
 
-        def is_isosceles(self, x: int, y: int, z: int) -> bool:
-            return x == y != z or x != y == z or x == z != y
+    def __str__(self):
+        return self.type
 
 
 if __name__ == '__main__':
+    # --------- testing ---------
+    # tests = {
+    #     'test 1': Triangle(145, 145, 139).__str__() == 'Равнобедренный',
+    #     'test 2': Triangle(59, 59, 59).__str__() == 'Равносторонний',
+    #     'test 3': Triangle(890, 199, 700).__str__() == 'Разносторонний',
+    # }
+    # flag = True
+    # for test in tests:
+    #     print(f'passed {test}' if tests[test] else f'{test} failed')
+    #     if not tests[test]:
+    #         flag = False
+    # print('passed all tests' if flag else 'some tests failed')
+
+    # --------- running ---------
     triangle = Triangle(int(input()), int(input()), int(input()))
-    print(triangle.type.type)
+    print(triangle)
