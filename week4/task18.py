@@ -7,18 +7,43 @@
 #    output "Don't know".
 #    -----------------------------------------------------------
 class SpeedstersRace:
-    def __init__(self, zoom_speed: int, flash_speed: int):
-        self.zoom_speed = zoom_speed
-        self.flash_speed = flash_speed
+    zoom_speed: int
+    flash_speed: int
+    winner: str
 
-    def get_winner(self):
-        if self.zoom_speed == self.flash_speed:
-            return "Don't know"
-        if self.zoom_speed > self.flash_speed:
-            return "NO"
-        return "YES"
+    class SpeedstersRaceWinner:
+
+        def __init__(self, zoom_speed: int, flash_speed):
+            SpeedstersRace.zoom_speed = zoom_speed
+            SpeedstersRace.flash_speed = flash_speed
+            SpeedstersRace.winner = self.get_winner()
+
+        def get_winner(self):
+            if SpeedstersRace.zoom_speed == SpeedstersRace.flash_speed:
+                return "Don't know"
+            if SpeedstersRace.zoom_speed > SpeedstersRace.flash_speed:
+                return "NO"
+            return "YES"
+
+        def __str__(self):
+            return SpeedstersRace.winner
 
 
 if __name__ == '__main__':
-    race = SpeedstersRace(zoom_speed=int(input()), flash_speed=int(input()))
-    print(race.get_winner())
+    # --------- testing ---------
+    # tests = {
+    #     'test 1': SpeedstersRace.SpeedstersRaceWinner(2204, 1505).__str__() == "NO",
+    #     'test 2': SpeedstersRace.SpeedstersRaceWinner(2344, 4324).__str__() == "YES",
+    #     'test 3': SpeedstersRace.SpeedstersRaceWinner(2500, 2500).__str__() == "Don't know"
+    # }
+    # flag = True
+    # for test in tests:
+    #     print(f'passed {test}' if tests[test] else f"{test} failed")
+    #     if not tests[test]:
+    #         flag = False
+    # print('all tests was passed' if flag else 'not all tests was passed')
+    #
+    # --------- running ---------
+    winner = SpeedstersRace.SpeedstersRaceWinner(int(input()), int(input()))
+    print(winner)
+
