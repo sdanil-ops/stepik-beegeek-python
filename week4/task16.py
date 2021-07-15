@@ -3,19 +3,28 @@
 #    Write a program that determines whether the rook can get
 #    from the first square (x) to the second (y) in one move.
 #    -----------------------------------------------------------
-from typing import Tuple
+class Rook:
+
+    def __init__(self, start_position):
+        self.start_position = start_position
 
 
-def is_rook_move(x: Tuple[int, int], y: Tuple[int, int]) -> bool:
-    """returns True if rook can move from x to y """
-    return x[0] == y[0] or x[1] == y[1]
+class RookMove(Rook):
 
-
-def check_rook_move(x: Tuple[int, int], y: Tuple[int, int]) -> str:
-    if is_rook_move(x, y):
-        return 'YES'
-    return 'NO'
+    def is_possible_move(self, end_position) -> bool:
+        return self.start_position[0] == end_position[0] or self.start_position[1] == end_position[1]
 
 
 if __name__ == '__main__':
-    print(check_rook_move((int(input()), int(input())), (int(input()), int(input()))))
+    # --------- testing ---------
+    tests = {
+        'test 1': RookMove((4, 4)).is_possible_move((5, 4)) is True,
+        'test 2': RookMove((4, 4)).is_possible_move((5, 5)) is False,
+        'test 3': RookMove((4, 4)).is_possible_move((4, 5)) is True
+    }
+    for test in tests:
+        print(f'passed {test}' if tests[test] else f'failed {test}')
+
+    # --------- running ---------
+    # move = RookMove((int(input()), int(input()))).is_possible_move((int(input()), int(input())))
+    # print('YES' if move else 'NO')
