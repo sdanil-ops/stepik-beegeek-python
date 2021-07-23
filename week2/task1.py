@@ -3,9 +3,11 @@
 #
 #    displays  "Hello, world!". You can paste any name against 'world'
 #    -----------------------------------------------------------
-from typing import Optional
+import unittest
+
 
 class HelloMessage:
+
     def __init__(self, recipient: str = None):
         if recipient is not None:
             self.recipient = recipient
@@ -15,26 +17,23 @@ class HelloMessage:
     def __str__(self):
         return f'Здравствуй, {self.recipient}!'
 
-
-class TestUnit:
-    def __init__(self, _class, _input, _output):
-        self._class = _class
-        self._input = _input
-        self._output = _output
-        self.is_passed = self.is_passed_test()
-        print('testing...', self._class, end=' ')
-
-    def is_passed_test(self):
-        test = self._class(self._input)
-        return test.__str__() == self._output
+    def __call__(self):
+        print(self.__str__())
 
 
-def test_hello_message(test: Optional[str] = None):
-    print('testing...', test)
-    test_case_passed = HelloMessage(test).__str__() == f'Здравствуй, {test}!' if test else 'Здравствуй, Мир!'
-    print('passed' if test_case_passed else 'fail')
+class TestHelloMessage(unittest.TestCase):
+
+    def test__str__(self):
+        test_items = {
+            'item 1': HelloMessage('test'),
+            'item 2': HelloMessage('python'),
+            'item 3': HelloMessage('Гвидо'),
+            'item 4': HelloMessage('мир')
+        }
+        for test_item in test_items:
+            self.assertEqual(test_items[test_item].__str__(), f'Здравствуй, {test_items[test_item].recipient}!')
 
 
 if __name__ == '__main__':
-    test = TestUnit(HelloMessage, 'Гвидо', 'Здравствуй, Гвидо!')
-    print('passed' if test.is_passed else 'fail')
+    hello_message = HelloMessage()
+    hello_message()
